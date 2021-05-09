@@ -1,0 +1,49 @@
+
+
+<h1 style="color:green;text-align:center;"> 
+    Photo Listing 
+</h1> 
+
+<div class="container">
+    <div class="card-group">
+
+        <!--bootstrap card with 3 horizontal images-->
+        <div class="row">
+            <div class="card col-md-4" *ngFor="let image of imageData | slice:0:9; let key = index">
+                <img class="card-img-top" [src]="image.thumbnailUrl">
+
+                <div class="card-body">
+                    <h3 class="card-title">{{image.id}} {{image.title}}</h3>
+                    <a href="{{image.url}}" target="_blank" class="card-text">{{image.url}}</a>
+                    <br>
+                    <button *ngIf="(isCompare[key] === false)" (click)="onCompareImages(image, key)" mat-raised-button color="primary">Compare</button>
+                    <button *ngIf="(isCompare[key] === true)" (click)="onRemoveImages(image, key)" mat-raised-button color="warn">Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="(imageTableList?.length)">
+    <h1 style="color:green;text-align:center;"> 
+        Comparison Table
+    </h1> 
+    
+    <div class="container">
+        <table>
+            <tr>
+              <th>Sr. No.</th>
+              <th>Image ID</th>
+              <th>Title</th>
+              <th>URL</th>
+            </tr>
+            <tr *ngFor="let image of imageTableList; let i = index">
+                <th>{{i + 1}}</th>
+                <th>{{image.id}}</th>
+                <th>{{image.title}}</th>
+                <th><a href="{{image.url}}" target="_blank" class="card-text">{{image.url}}</a></th>
+              </tr>
+
+          </table>
+    </div>
+</div>
